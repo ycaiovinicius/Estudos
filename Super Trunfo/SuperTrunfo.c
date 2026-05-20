@@ -1,7 +1,5 @@
 #include <stdio.h>
-
 // Desafio Super Trunfo - Países
-// Tema 2
 
 struct Carta {
     char estado;
@@ -24,32 +22,32 @@ int main() {
     // ---------------- CARTA 1 ----------------
     // --------------Entrada de dados--------------
 
-    printf("***INSIRA AS INFORMAÇÕES DA CARTA 1***\n\n");
+    printf("***INSIRA AS INFORMAÇÕES DA CARTA 1***\n");
 
     printf("País: França\n");
 
-    printf("Estado:\n");
+    printf("Estado: ");
     scanf(" %c", &franca.estado);
 
-    printf("Nome da Cidade:\n");
+    printf("\nNome da Cidade: ");
     scanf(" %49[^\n]", franca.cidade);
 
-    printf("Código da carta:\n");
+    printf("\nCódigo da carta: ");
     scanf("%s", franca.codigo);
 
-    printf("População total:\n");
+    printf("\nPopulação total: ");
     scanf("%lu", &franca.populacao);
 
-    printf("Área da cidade (km²):\n");
+    printf("\nÁrea da cidade (km²): ");
     scanf("%f", &franca.area);
 
-    printf("PIB:\n");
+    printf("\nPIB: ");
     scanf("%f", &franca.pib);
 
-    printf("Número de pontos turísticos:\n");
+    printf("\nNúmero de pontos turísticos: ");
     scanf("%d", &franca.pontos_turisticos);
 
-    printf("\nCarta 1 registrada com sucesso!\n");
+    printf("\n\nCarta 1 registrada com sucesso!\n");
 
     // Calculo Densidade Populacional e PIB per Capita
     franca.densidade_populacional = franca.populacao / franca.area;
@@ -68,29 +66,29 @@ int main() {
     // ---------------- CARTA 2 ----------------
     // -------------Entrada de dados--------------
 
-    printf("***INSIRA AS INFORMAÇÕES DA CARTA 2***\n\n");
+    printf("***INSIRA AS INFORMAÇÕES DA CARTA 2***\n");
 
     printf("País: Brasil\n");
 
-    printf("Estado:\n");
+    printf("Estado: ");
     scanf(" %c", &brasil.estado);
 
-    printf("Nome da Cidade:\n");
+    printf("\nNome da Cidade: ");
     scanf(" %49[^\n]", brasil.cidade);
 
-    printf("Código da carta:\n");
+    printf("\nCódigo da carta: ");
     scanf("%s", brasil.codigo);
 
-    printf("População total:\n");
+    printf("\nPopulação total: ");
     scanf("%lu", &brasil.populacao);
 
-    printf("Área da cidade (km²):\n");
+    printf("\nÁrea da cidade (km²): ");
     scanf("%f", &brasil.area);
 
-    printf("PIB:\n");
+    printf("\nPIB: ");
     scanf("%f", &brasil.pib);
 
-    printf("Número de pontos turísticos:\n");
+    printf("\nNúmero de pontos turísticos: ");
     scanf("%d", &brasil.pontos_turisticos);
 
     //Calculo Densidade Populacional e PIB per Capita
@@ -109,7 +107,6 @@ int main() {
 
 
     // ----------- EXIBIÇÃO DAS CARTAS -----------
-
     printf("===== EXIBIÇÃO DAS CARTAS =====\n\n");
 
     printf("Carta 1 - FRANÇA\n");
@@ -138,16 +135,127 @@ int main() {
     printf("PIB per Capita: %.2f reais\n", brasil.pib_capita);
     printf("Super poder: %.2f\n\n", brasil.super_poder);
 
-        // ----------- COMPARAÇÂO DAS CARTAS -----------
-printf("====== COMPARAÇÂO DAS CARTAS ======\n");
-printf("População: Brasil (carta2) Venceu (%d)\n", franca.populacao > brasil.populacao);
-printf("Area: Brasil (carta 2) venceu (%d)\n", franca.area > brasil.area);
-printf("PIB: França (carta 1) venceu (%d)\n", franca.pib > brasil.pib);
-printf("Pontos turísticos: Brasil (carta 2) venceu (%d)\n", franca.pontos_turisticos > brasil.pontos_turisticos);
-printf("Densidade Populacional: Brasil (carta 2) venceu (%d)\n", franca.densidade_populacional > brasil.densidade_populacional);
-printf("PIB per Capita: França (carta 1) venceu (%d)\n", franca.pib_capita > brasil.pib_capita);
-printf("Super Poder: Brasil (carta2) Venceu (%d)\n", franca.super_poder > brasil.super_poder);
+// ----------- MENU INTERATIVO -----------
 
+// Variáveis responsáveis por armazenar:
+// (Resultado das comparações)
+// (Atributos escolhidos pelo usuário)
+int resultado1, resultado2;
+char primeiroAtributo, segundoAtributo;
+
+// ----------- ESCOLHA DO PRIMEIRO ATRIBUTO -----------
+
+// Menu para escolha do primeiro atributo
+printf("====== COMPARAÇÃO DE CARTAS ======\n");
+printf("Escolha o primeiro atributo:\n");
+printf("P - População\n");
+printf("A - Área\n");
+printf("B - PIB\n");
+printf("T - Pontos Turísticos\n");
+printf("D - Densidade Demográfica\n");
+
+scanf(" %c", &primeiroAtributo);
+
+// ----------- COMPARAÇÃO DO PRIMEIRO ATRIBUTO -----------
+switch (primeiroAtributo)
+{
+case 'P':
+case 'p':
+resultado1 = franca.populacao > brasil.populacao ? 1 : 0;
+
+    break;
+case 'A':
+case 'a':
+resultado1 = franca.area > brasil.area ? 1 : 0;
+
+    break;
+case 'B':
+case 'b':
+resultado1 = franca.pib > brasil.pib ? 1 : 0;
+
+    break;
+case 'T':
+case 't':
+resultado1 = franca.pontos_turisticos > brasil.pontos_turisticos ? 1 : 0;
+
+    break;
+case 'D':
+case 'd':
+// Menor valor vence
+resultado1 = franca.densidade_populacional < brasil.densidade_populacional ? 1 : 0;
+
+    break;
+
+default:
+printf("Opção inválida!\n");
+return 1;
+}
+
+// ----------- ESCOLHA DO SEGUNDO ATRIBUTO -----------
+printf("\nEscolha o segundo atributo:\n");
+printf("Atenção! O segundo atributo deve ser diferente do primeiro!\n");
+printf("P - População\n");
+printf("A - Área\n");
+printf("B - PIB\n");
+printf("T - Pontos Turísticos\n");
+printf("D - Densidade Demográfica\n");
+
+scanf(" %c", &segundoAtributo);
+
+// Verifica se o jogador escolheu o mesmo atributo duas vezes
+if (primeiroAtributo == segundoAtributo) {
+    printf("Você escolheu o mesmo atributo!\n");
+    return 1;
+} else {
+
+    // ----------- COMPARAÇÃO DO SEGUNDO ATRIBUTO -----------
+    switch (segundoAtributo)
+    {
+case 'P':
+case 'p':
+resultado2 = franca.populacao > brasil.populacao ? 1 : 0;
+
+    break;
+case 'A':
+case 'a':
+resultado2 = franca.area > brasil.area ? 1 : 0;
+
+    break;
+case 'B':
+case 'b':
+resultado2 = franca.pib > brasil.pib ? 1 : 0;
+
+    break;
+case 'T':
+case 't':
+resultado2 = franca.pontos_turisticos > brasil.pontos_turisticos ? 1 : 0;
+
+    break;
+case 'D':
+case 'd':
+// Menor valor vence
+resultado2 = franca.densidade_populacional < brasil.densidade_populacional ? 1 : 0;
+
+    break;
+
+default:
+printf("\nOpção inválida!\n");
+return 1;
+    }
+}
+
+// Exibição dos atributos escolhidos
+printf("\nPrimeiro atributo: %c", primeiroAtributo);
+printf("\nSegundo atributo: %c", segundoAtributo);
+
+// ----------- RESULTADO FINAL -----------
+if(resultado1 == 1 && resultado2 == 1) {
+    printf("\nParabéns, você venceu!!\n");
+} else if (resultado1 != resultado2) {
+    printf("\nEmpatou!\n");
+} else {
+    printf("\nInfelizmente, você perdeu!!\n");
+}
 
     return 0;
 }
